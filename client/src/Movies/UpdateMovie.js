@@ -2,23 +2,17 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-
 const UpdateMovie = props => {
   const { id } = props.match.params;
 
-  const [movie, setMovie] = useState({
-    title: '',
-    director: '',
-    metascore: '',
-    stars: []
-  })
+  const [movie, setMovie] = useState()
 
   const handleChanges = e => setMovie({ ...movie, [e.target.name]: e.target.value })
 
   const handleSubmit = e => {
     e.preventDefault();
     axios
-      .put(`/${id}`,  movie)
+      .put(`http://localhost:5000/api/movies/${id}`, movie)
       .then(()=>{
         setMovie({
           title: '',
@@ -27,7 +21,7 @@ const UpdateMovie = props => {
           stars: []
         })
         props.history.push('/');
-        console.log(res)
+        console.log(movie)
       })
       .catch(err => console.log("Submit unsuccessful:", err))
   }

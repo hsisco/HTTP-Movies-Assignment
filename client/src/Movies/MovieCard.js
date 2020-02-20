@@ -4,7 +4,7 @@ import { Button } from 'reactstrap';
 
 
 const MovieCard = props => {
-  const { title, director, metascore, stars } = props.movie;
+  const { id, title, director, metascore, stars } = props.movie;
   return (
     <div className="movie-card">
       <h2>{title}</h2>
@@ -21,7 +21,7 @@ const MovieCard = props => {
           {star}
         </div>
       ))}
-      
+
       <NavLink to={`/update-movie/${id}`}>
         <Button>Edit</Button>
       </NavLink>
