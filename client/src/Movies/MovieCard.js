@@ -12,7 +12,7 @@ const MovieCard = props => {
         Director: <em>{director}</em>
       </div>
       <div className="movie-metascore">
-        Metascore: <strong>{metascore}</strong>
+        Meta-score: <strong>{metascore}</strong>
       </div>
       <h3>Actors</h3>
 
@@ -21,6 +21,7 @@ const MovieCard = props => {
           {star}
         </div>
       ))}
+      
       <NavLink to={`/update-movie/${id}`}>
         <Button>Edit</Button>
       </NavLink>
