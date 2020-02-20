@@ -1,4 +1,7 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { Button } from 'reactstrap';
+
 
 const MovieCard = props => {
   const { title, director, metascore, stars } = props.movie;
@@ -18,6 +21,9 @@ const MovieCard = props => {
           {star}
         </div>
       ))}
+      <NavLink to={`/update-movie/${id}`}>
+        <Button>Edit</Button>
+      </NavLink>
     </div>
   );
 };
