@@ -23,13 +23,16 @@ const UpdateMovie = props => {
         setMovie({
           title: '',
           director: '',
-          metascore: ''
+          metascore: '',
+          stars: []
         })
-        history.pushState('/');
+        props.history.push('/');
         console.log(res)
       })
       .catch(err => console.log("Submit unsuccessful:", err))
   }
+
+  const updateStars = e => setMovie({ ...movie, stars: e.target.value })
 
   return (
     <div>
@@ -47,16 +50,21 @@ const UpdateMovie = props => {
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label sm={2}>Metascore</Label>
+          <Label sm={2}>Meta-score</Label>
           <Col sm={10}>
           <Input type="number" name="metascore" value={movie.metascore} onChange={handleChanges} />
           </Col>
         </FormGroup>
-        
+        <FormGroup row>
+          <Label sm={2}>Starring</Label>
+          <Col sm={10}>
+          <Input type="textarea" name="stars" value={movie.stars} onChange={updateStars} />
+          </Col>
+        </FormGroup>
         <FormGroup check row>
           <Col sm={{ size: 10, offset: 2 }}>
             <Button type="submit">
-              Update Movie
+              Save
             </Button>
           </Col>
         </FormGroup>
