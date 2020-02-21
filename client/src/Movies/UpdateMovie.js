@@ -42,6 +42,17 @@ const UpdateMovie = props => {
 
   const editStars = e => setMovie({ ...movie, stars: e.target.value })
 
+  const deleteMovie = e => {
+    e.preventDefault();
+    axios
+      .delete(`http://localhost:5000/api/movies/${id}`)
+      .then(res => {
+        props.history.push('/');
+        console.log("Deleted Movie:", movie)
+      })
+      .catch(err => console.log("Delete unsuccessful:", err))
+}
+
   return (
     <div>
       <Form onSubmit={handleSubmit}>
@@ -74,6 +85,7 @@ const UpdateMovie = props => {
             <Button type="submit">
               Save
             </Button>
+            <Button type="button" onClick={deleteMovie}>Delete</Button>
           </Col>
         </FormGroup>
       </Form>
