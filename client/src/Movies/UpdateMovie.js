@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const UpdateMovie = props => {
+  
   const { id } = props.match.params;
 
-  const [movie, setMovie] = useState()
+  const [movie, setMovie] = useState({
+    title: '',
+    director: '',
+    metascore: '',
+    stars: []
+  })
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/movies/${id}`)
+      .then(res => setMovie(res.data),
+        console.log("Movie to edit:", movie))
+      .catch(err => console.log("Movie not found:", err))
+  }, [id])
 
   const handleChanges = e => setMovie({ ...movie, [e.target.name]: e.target.value })
 
@@ -21,12 +35,12 @@ const UpdateMovie = props => {
           stars: []
         })
         props.history.push('/');
-        console.log(movie)
+        console.log("Updated Movie:", movie)
       })
       .catch(err => console.log("Submit unsuccessful:", err))
   }
 
-  const updateStars = e => setMovie({ ...movie, stars: e.target.value })
+  const editStars = e => setMovie({ ...movie, stars: e.target.value })
 
   return (
     <div>
@@ -52,7 +66,7 @@ const UpdateMovie = props => {
         <FormGroup row>
           <Label sm={2}>Starring</Label>
           <Col sm={10}>
-          <Input type="textarea" name="stars" value={movie.stars} onChange={updateStars} />
+          <Input type="textarea" name="stars" value={movie.stars} onChange={editStars} />
           </Col>
         </FormGroup>
         <FormGroup check row>
