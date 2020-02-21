@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
-
 const MovieCard = props => {
   const { id, title, director, metascore, stars } = props.movie;
   return (
@@ -15,13 +14,11 @@ const MovieCard = props => {
         Meta-score: <strong>{metascore}</strong>
       </div>
       <h3>Actors</h3>
-
-      {stars.map(star => (
-        <div key={star} className="movie-star">
-          {star}
+        {stars.map(star => (
+          <div key={star} className="movie-star">
+            <li>{star}</li>
         </div>
       ))}
-
       <NavLink to={`/update-movie/${id}`}>
         <Button>Edit</Button>
       </NavLink>
